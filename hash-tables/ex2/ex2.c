@@ -4,24 +4,73 @@
 #include "hashtable.h"
 #include "ex2.h"
 
+/*
+DEFINITION ----------
+You've booked a really cheap one-way flight. Unfortunately, that means you have tons 
+of layovers before you reach your destination. The morning of, you woke up late and 
+had to scramble to the airport to catch your first flight. However, in your rush, you 
+accidentally scrambled all your flight tickets. You don't know the route of your 
+entire trip now!
+
+Write a function reconstruct_trip to reconstruct your trip from your mass of flight tickets.
+
+INPUT ---------
+typedef struct Ticket {
+  char *source;
+  char *destination;
+} Ticket;
+
+Ticket **tickets = {
+  Ticket{ source: "PIT", destination: "ORD" },
+  Ticket{ source: "XNA", destination: "CID" },
+  Ticket{ source: "SFO", destination: "BHM" },
+  Ticket{ source: "FLG", destination: "XNA" },
+  Ticket{ source: "NONE", destination: "LAX" },
+  Ticket{ source: "LAX", destination: "SFO" },
+  Ticket{ source: "CID", destination: "SLC" },
+  Ticket{ source: "ORD", destination: "NONE" },
+  Ticket{ source: "SLC", destination: "PIT" },
+  Ticket{ source: "BHM", destination: "FLG" }
+};
+
+RETURN ----------
+Your function should output a char ** array of strings with the entire route of your trip. 
+For the above example, it should look like this:
+
+{ "LAX", "SFO", "BHM", "FLG", "XNA", "CID", "SLC", "PIT", "ORD", "NONE" }
+
+NOTE ----------
+We can hash each ticket such that the starting location is the key and the destination is the value.
+*/
+
 char **reconstruct_trip(Ticket **tickets, int length)
 {
   HashTable *ht = create_hash_table(16);
   char **route = malloc(length * sizeof(char *));
 
-  // YOUR CODE HERE
+  // populate hash table with routes
+  for (int x = 0; x < length; x++)
+  {
+    hash_table_insert(ht, tickets[x]->source, tickets[x]->destination);
+  }
+
+  char *start = "NONE";
+  for (int x = 0; x < length; x++)
+  {
+    route[x] = hash_table_retrieve(ht, start);
+    start = route[x];
+  }
 
   return route;
 }
 
 void print_route(char **route, int length)
 {
-  for (int i = 0; i < length; i++) {
+  for (int i = 0; i < length; i++)
+  {
     printf("%s\n", route[i]);
   }
 }
-
-
 
 #ifndef TESTING
 int main(void)

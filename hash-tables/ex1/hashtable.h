@@ -1,13 +1,15 @@
 #ifndef hashtables_h
 #define hashtables_h
 
-typedef struct LinkedPair {
+typedef struct LinkedPair
+{
   int key;
   int value;
   struct LinkedPair *next;
 } LinkedPair;
 
-typedef struct HashTable {
+typedef struct HashTable
+{
   int capacity;
   LinkedPair **storage;
 } HashTable;
