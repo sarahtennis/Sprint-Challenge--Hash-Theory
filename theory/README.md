@@ -74,11 +74,11 @@ This can be represented with boolean algebra like so:
 * `SUM = A ⊕ B`  (alternate: `A ^ B` or `A xor B`)
 * `CARRY = A ∧ B`  (alternate: `A && B`)
 
-##### NOTES
-XOR 2 -> (A && ~B) || (B && ~A)
-XOR 3 -> (((A && ~B) || (B && ~A)) && ~C) || (C && ~((A && ~B) || (B && ~A)))
-Sum only true if odd number of 1s. (exclusively 1 of them, or all of them)
-Carry only true if 2+ number of 1s
+#### NOTES
+- XOR 2 -> (A && ~B) || (B && ~A)
+- XOR 3 -> (((A && ~B) || (B && ~A)) && ~C) || (C && ~((A && ~B) || (B && ~A)))
+- Sum only true if odd number of 1s. (exclusively 1 of them, or all of them)
+- Carry only true if 2+ number of 1s
 
 ```
 for x in [False, True]:
